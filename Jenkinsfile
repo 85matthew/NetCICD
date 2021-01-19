@@ -23,8 +23,8 @@ pipeline {
                 echo "${CML_URL}"
                 script { 
                     gitCommit = sh(returnStdout: true, script: 'git rev-parse --short  HEAD').trim()
-                    jc = sh(returnStdout: true, script: 'curl --insecure -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' \'' + "${env.JENKINS_URL}" + 'crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)\'').trim()
-                    sh(returnStdout: true, script: 'echo HHHHHHHH; echo $jc')
+//                     jc = sh(returnStdout: true, script: 'curl --insecure -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' \'' + "${env.JENKINS_URL}" + 'crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)\'').trim()
+//                     sh(returnStdout: true, script: 'echo HHHHHHHH; echo $jc')
                     JenkinsCrumb = jc.substring(14)
                 }
             }
@@ -66,7 +66,8 @@ pipeline {
                     sh 'curl --insecure -X GET -u ' + "${CML_CRED}" + ' ' + "${CML_URL}"  + '/simengine/rest/stop/stage0-' + "${gitCommit}"
 
                     echo 'Removing Jenkins Agent'
-                    sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED}" + ' -H "Content-Type:application/x-www-form-urlencoded" -H "' + "${jc}" + '" -X POST "' + "${env.JENKINS_URL}" + 'computer/stage0' + "-" + "${gitCommit}" + '/doDelete"'
+                    sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED}" + ' -H "Content-Type:application/x-www-form-urlencoded" "' + '" -X POST "' + "${env.JENKINS_URL}" + 'computer/stage0' + "-" + "${gitCommit}" + '/doDelete"'
+//                     sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED}" + ' -H "Content-Type:application/x-www-form-urlencoded" -H "' + "${jc}" + '" -X POST "' + "${env.JENKINS_URL}" + 'computer/stage0' + "-" + "${gitCommit}" + '/doDelete"'
                 }
             }
         }
