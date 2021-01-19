@@ -24,7 +24,7 @@ pipeline {
                 script { 
                     gitCommit = sh(returnStdout: true, script: 'git rev-parse --short  HEAD').trim()
                     jc = sh(returnStdout: true, script: 'curl --insecure -u ' + "${JENKINS_CRED}" + ' \'' + "${env.JENKINS_URL}" + 'crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)\'').trim()
-                    sh(returnStdout: true, script: 'echo ${jc}')
+                    sh(returnStdout: true, script: 'echo HHHHHHHH; echo $jc')
                     JenkinsCrumb = jc.substring(14)
                 }
             }
