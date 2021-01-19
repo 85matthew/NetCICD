@@ -23,7 +23,7 @@ pipeline {
                 echo "${CML_URL}"
                 script { 
                     gitCommit = sh(returnStdout: true, script: 'git rev-parse --short  HEAD').trim()
-                    jc = sh(returnStdout: true, script: 'curl -u ' + "${JENKINS_CRED}" + ' \'' + "${env.JENKINS_URL}" + 'crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)\'').trim()
+                    jc = sh(returnStdout: true, script: 'curl --insecure -u ' + "${JENKINS_CRED}" + ' \'' + "${env.JENKINS_URL}" + 'crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)\'').trim()
                     JenkinsCrumb = jc.substring(14)
                 }
             }
