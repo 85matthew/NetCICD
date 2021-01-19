@@ -8,7 +8,7 @@ pipeline {
     environment {
         JENKINS_CRED = credentials('Jenkins-SIM')
         CML_CRED = credentials('CML-SIM-CRED')
-//         CML_URL = env.CML-URL
+        CML_URL = env.CML-URL
     }
     stages {
         stage('Prepare Jenkins...') {
