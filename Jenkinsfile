@@ -207,8 +207,6 @@ def startsim(stage) {
 
 @NonCPS
 def buildJenkinsWorker(stage) {
-
-//     ComputerLauncher launcher = new ComputerLauncher();
     ComputerLauncher launcher = new JNLPLauncher(true)
 
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
@@ -219,6 +217,5 @@ def buildJenkinsWorker(stage) {
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
 //     worker.retentionStrategy = retentionStrategy()
-
     return worker
 }
