@@ -8,6 +8,10 @@ import hudson.model.Slave
 import hudson.slaves.DumbSlave
 
 import hudson.slaves.ComputerLauncher
+import hudson.plugins.sshslaves.SSHLauncher
+
+import hudson.slaves.ComputerLauncher
+
 
 pipeline {
     agent none
