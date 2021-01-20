@@ -2,6 +2,13 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
+import hudson.model.AbstractModelObject
+import hudson.model.Node
+import hudson.model.Slave
+import hudson.slaves.DumbSlave
+
+import hudson.slaves.ComputerLauncher
+
 pipeline {
     agent none
     
@@ -139,12 +146,6 @@ pipeline {
 }
 
 def startsim(stage) {
-    import hudson.model.AbstractModelObject
-    import hudson.model.Node
-    import hudson.model.Slave
-    import hudson.slaves.DumbSlave
-
-    import hudson.slaves.ComputerLauncher
 
 
     ComputerLauncher launcher = new ComputerLauncher();
