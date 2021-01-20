@@ -148,7 +148,20 @@ pipeline {
 def startsim(stage) {
 
 
-    ComputerLauncher launcher = new ComputerLauncher();
+//     ComputerLauncher launcher = new ComputerLauncher();
+    ComputerLauncher launcher = new com.cloudbees.jenkins.plugins.sshslaves.SSHLauncher(
+            "host", // Host
+            new SSHConnectionDetails(
+                    "credentialsId", // Credentials ID
+                    22, // port
+                    (String)null, // JavaPath
+                    (String)null, // JVM Options
+                    (String)null, // Prefix Start Agent Command
+                    (String)null, // Suffix Start Agent Command
+                    (boolean)false, // Log environment on initial connect
+                    (ServerKeyVerificationStrategy) serverKeyVerificationStrategy // Host Key Verification Strategy
+            )
+    )
     launcher.stapler = "hudson.slaves.JNLPLauncher"
     launcher.$class = "hudson.plugins.sshslaves.SSHLauncher"
     launcher.retentionStrategy = '{"$class": "hudson.slaves.RetentionStrategy$Always", "stapler-class": "hudson.slaves.retentionStrategy$Always"}'
