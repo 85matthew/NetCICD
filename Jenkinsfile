@@ -223,6 +223,7 @@ def buildJenkinsWorker(stage) {
 //     JSONObject jo = new JSONObject()
 //     def jo = new groovy.json.JsonBuilder(worker).toString()
 //     return new groovy.json.JsonSlurperClassic().parseText(worker.toString())
+    println(groovy.json.JsonOutput.toJson(worker))
     return groovy.json.JsonOutput.toJson(worker)
 
 }
