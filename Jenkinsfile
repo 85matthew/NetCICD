@@ -144,7 +144,6 @@ def startsim(stage) {
     import hudson.model.Slave
     import hudson.slaves.DumbSlave
 
-    import hudson.model.AbstractDescribableImpl<ComputerLauncher>
     import hudson.slaves.ComputerLauncher
 
 
