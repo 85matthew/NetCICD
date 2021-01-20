@@ -156,12 +156,13 @@ def startsim(stage) {
 
 //     ComputerLauncher launcher = new ComputerLauncher();
     ComputerLauncher launcher = new JNLPLauncher(true)
+    launcher.remoteFS = "/root"
 
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
 
     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
     worker.numExecutors = "1"
-    worker.remoteFS = "/root"
+//     worker.remoteFS = "/root"
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
     worker.retentionStrategy = "Always"
