@@ -14,6 +14,8 @@ import hudson.slaves.JNLPLauncher
 
 import hudson.slaves.ComputerLauncher
 
+import groovy.json.JsonBuilder
+
 
 pipeline {
     agent none
