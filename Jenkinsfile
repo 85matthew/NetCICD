@@ -175,6 +175,8 @@ def startsim(stage) {
     echo 'Creating Jenkins build node for commit: ' + "${gitCommit}"
     sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' -H Content-Type:application/x-www-form-urlencoded "' + '" -X POST -d \'json=${worker}\' "' + "${env.JENKINS_URL}" + 'computer/doCreateItem?name="stage' + "${stage}" + "-" + "${gitCommit}" + '"&type=hudson.slaves.DumbSlave"'
 
+    launcher = null
+
     echo 'Retrieving Agent Secret'
     script {
         agentSecret = jenkins.model.Jenkins.getInstance().getComputer("stage" + "${stage}" + "-" + "$gitCommit").getJnlpMac()
