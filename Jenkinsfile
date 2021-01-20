@@ -150,9 +150,7 @@ def startsim(stage) {
     ComputerLauncher launcher = new ComputerLauncher();
     launcher.stapler = "hudson.slaves.JNLPLauncher"
     launcher.$class = "hudson.plugins.sshslaves.SSHLauncher"
-    launcher.retentionStrategy = {
-        "$class": "hudson.slaves.RetentionStrategy$Always",
-        "stapler-class": "hudson.slaves.retentionStrategy$Always"
+    launcher.retentionStrategy = '{"$class": "hudson.slaves.RetentionStrategy$Always", "stapler-class": "hudson.slaves.retentionStrategy$Always"}'
     }
 
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
