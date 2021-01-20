@@ -9,9 +9,6 @@ import hudson.slaves.DumbSlave
 
 import hudson.slaves.ComputerLauncher
 
-import com.cloudbees.jenkins.plugins.sshslaves.verification.*
-import com.cloudbees.jenkins.plugins.sshslaves.SSHConnectionDetails
-
 pipeline {
     agent none
     
@@ -152,7 +149,7 @@ def startsim(stage) {
 
 
 //     ComputerLauncher launcher = new ComputerLauncher();
-    ComputerLauncher launcher = new com.cloudbees.jenkins.plugins.sshslaves.SSHLauncher(
+    ComputerLauncher launcher = new SSHLauncher(
             "host", // Host
             new SSHConnectionDetails(
                     "credentialsId", // Credentials ID
