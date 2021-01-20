@@ -217,5 +217,10 @@ def buildJenkinsWorker(stage) {
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
 //     worker.retentionStrategy = retentionStrategy()
-    return worker
+
+//     JSONObject jo = new JSONObject()
+    jo = <JSONObject> worker
+
+
+    return jo
 }
