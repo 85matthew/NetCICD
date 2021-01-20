@@ -156,7 +156,6 @@ def startsim(stage) {
 
 //     ComputerLauncher launcher = new ComputerLauncher();
     ComputerLauncher launcher = new JNLPLauncher(true)
-    launcher.remoteFS = "/root"
 
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
 
