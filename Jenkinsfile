@@ -161,21 +161,6 @@ def startsim(stage) {
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
     worker.retentionStrategy = "Always"
-    worker.launcher =
-
-
-//     JSONObject jenkinsNodeJson = new JSONObject();
-//     jenkinsNodeJson.put('name', "stage${stage}-${gitCommit}");
-//     jenkinsNodeJson.put('nodeDescription',"NetCICD+host+for+commit+is+stage${stage}-${gitCommit}");
-//     jenkinsNodeJson.put('numExecutors', "1");
-//     jenkinsNodeJson.put('remoteFS',"/root");
-//     jenkinsNodeJson.put('labelString', "worker-${stage}-${gitCommit}")
-//     jenkinsNodeJson.put('mode', "EXCLUSIVE")
-//     jenkinsNodeJson.put('', ["hudson.slaves.JNLPLauncher",+"hudson.slaves.RetentionStrategy$Always"])
-//     jenkinsNodeJson.put('launcher', {"stapler-class":+"hudson.slaves.JNLPLauncher",+"$class":+"hudson.slaves.JNLPLauncher",+"workDirSettings":+{"disabled":+false,+"workDirPath":+"",+"internalDir":+"remoting",+"failIfWorkDirIsMissing":+false},+"tunnel":+"",+"vmargs":+""})
-//     jenkinsNodeJson.put('retentionStrategy', {"stapler-class":+"hudson.slaves.RetentionStrategy$Always",+"$class":+"hudson.slaves.RetentionStrategy$Always"})
-//     jenkinsNodeJson.put('nodeProperties', {"stapler-class-bag":+"true"})
-//     jenkinsNodeJson.put('type', "hudson.slaves.DumbSlave")
 
 
 
