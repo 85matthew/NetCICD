@@ -151,25 +151,6 @@ pipeline {
     }
 }
 
-// @NonCPS
-
-def buildJenkinsWorker() {
-
-//     ComputerLauncher launcher = new ComputerLauncher();
-    ComputerLauncher launcher = new JNLPLauncher(true)
-
-    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
-
-    worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
-    worker.numExecutors = "1"
-//     worker.remoteFS = "/root"
-    worker.labelString = "worker-${stage}-${gitCommit}"
-    worker.mode = "EXCLUSIVE"
-//     worker.retentionStrategy = retentionStrategy()
-
-    return worker
-}
-
 def startsim(stage) {
 
 
@@ -222,4 +203,22 @@ def startsim(stage) {
         }
     }
     return null
+}
+
+@NonCPS
+def buildJenkinsWorker(stage) {
+
+//     ComputerLauncher launcher = new ComputerLauncher();
+    ComputerLauncher launcher = new JNLPLauncher(true)
+
+    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
+
+    worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
+    worker.numExecutors = "1"
+//     worker.remoteFS = "/root"
+    worker.labelString = "worker-${stage}-${gitCommit}"
+    worker.mode = "EXCLUSIVE"
+//     worker.retentionStrategy = retentionStrategy()
+
+    return worker
 }
