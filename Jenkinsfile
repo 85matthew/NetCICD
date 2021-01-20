@@ -221,7 +221,7 @@ def buildJenkinsWorker(stage) {
 //     worker.retentionStrategy = retentionStrategy()
 
 //     JSONObject jo = new JSONObject()
-    def jo = new groovy.json.JsonBuilder(worker).toString()
-//     return new groovy.json.JsonSlurperClassic().parseText(worker)
+//     def jo = new groovy.json.JsonBuilder(worker).toString()
+    return new groovy.json.JsonSlurperClassic().parseText(worker).toString()
 
 }
