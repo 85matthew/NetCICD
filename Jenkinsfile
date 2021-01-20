@@ -156,7 +156,6 @@ def startsim(stage) {
 
 //     ComputerLauncher launcher = new ComputerLauncher();
     ComputerLauncher launcher = new JNLPLauncher(true)
-    launcher.mode = "EXCLUSIVE"
     launcher.retentionStrategy = '{"$class": "hudson.slaves.RetentionStrategy$Always", "stapler-class": "hudson.slaves.retentionStrategy$Always"}'
     }
 
