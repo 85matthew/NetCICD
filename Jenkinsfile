@@ -175,18 +175,6 @@ def startsim(stage) {
         agentSecret = jenkins.model.Jenkins.getInstance().getComputer("stage" + "${stage}" + "-" + "$gitCommit").getJnlpMac()
     }
     echo "secret = " + "${agentSecret}"
-//
-//     echo "Inserting jenkins url in docker jumphost configuration"
-//     sh "sed -i 's%jenkins_url%" + "${env.JENKINS_URL}" + "%g' virl/stage" + "${stage}" + ".virl"
-//
-//     echo "Inserting agent secret in docker jumphost configuration"
-//     sh "sed -i 's/jenkins_secret/" + "${agentSecret}" + "/g' virl/stage" + "${stage}" + ".virl"
-//
-//     echo "Configuring Jenkins agent to use"
-//     sh "sed -i 's/jenkins_agent/stage" + "${stage}" + "-" + "${gitCommit}" + "/g' virl/stage" + "${stage}" + ".virl"
-//
-//     echo 'Starting CML simulation for stage ' + "${stage}"
-//     sh 'curl --insecure -X POST -u ' + "${CML_CRED}" + ' --header "Content-Type:text/xml;charset=UTF-8" --data-binary @virl/stage' + "${stage}" + '.virl ' + "${CML_URL}" + '/simengine/rest/launch?session=stage' + "${stage}" + '-' + "${gitCommit}"
 
     timeout(time: 30, unit: "MINUTES") {
         script {
@@ -209,4 +197,3 @@ def startsim(stage) {
         }
     }
     return null
-}
