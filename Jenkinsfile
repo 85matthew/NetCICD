@@ -164,7 +164,7 @@ def startsim(stage) {
 //     worker.remoteFS = "/root"
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
-    worker.retentionStrategy = public retentionStrategy()
+//     worker.retentionStrategy = retentionStrategy()
 
 
 
