@@ -219,7 +219,7 @@ def buildJenkinsWorker(stage) {
 //     worker.retentionStrategy = retentionStrategy()
 
 //     JSONObject jo = new JSONObject()
-    jo = <JSONObject> worker
+    jo = new JsonBuilder(worker)
 
 
     return jo
