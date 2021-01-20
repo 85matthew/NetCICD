@@ -7,8 +7,9 @@ import hudson.model.Node
 import hudson.model.Slave
 import hudson.slaves.DumbSlave
 
+
 import hudson.slaves.ComputerLauncher
-import hudson.plugins.sshslaves.SSHLauncher
+import hudson.slaves.JNLPLauncher
 
 
 import hudson.slaves.ComputerLauncher
@@ -154,9 +155,10 @@ def startsim(stage) {
 
 
 //     ComputerLauncher launcher = new ComputerLauncher();
-    ComputerLauncher launcher = new SSHLauncher()
+    ComputerLauncher launcher = new JNLPLauncher(true)
     launcher.stapler = "hudson.slaves.JNLPLauncher"
-    launcher.$class = "hudson.plugins.sshslaves.SSHLauncher"
+    launcher.$class = "hudson.plugins.sshslaves.JNLPLauncher"
+    launcher.mode = "EXCLUSIVE"
     launcher.retentionStrategy = '{"$class": "hudson.slaves.RetentionStrategy$Always", "stapler-class": "hudson.slaves.retentionStrategy$Always"}'
     }
 
