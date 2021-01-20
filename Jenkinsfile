@@ -151,6 +151,7 @@ pipeline {
     }
 }
 
+@NonCPS
 def startsim(stage) {
 
 
