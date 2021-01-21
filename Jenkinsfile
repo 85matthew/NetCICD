@@ -170,33 +170,8 @@ def startsim(stage) {
 //     worker.mode = "EXCLUSIVE"
 // //     worker.retentionStrategy = retentionStrategy()
 
-//     def jenkinsWorker = buildJenkinsWorker(stage)
-
-    ComputerLauncher launcher = new JNLPLauncher(true)
-
-    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
-
-    worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
-    worker.numExecutors = "1"
-    //     worker.setRemoteFS = "/root"
-    worker.labelString = "worker-${stage}-${gitCommit}"
-    worker.mode = "EXCLUSIVE"
-    //     worker.setRetentionStrategy = retentionStrategy()
-
-    //     JSONObject jo = new JSONObject()
-    //     def jo = new groovy.json.JsonBuilder(worker).toString()
-    //     return new groovy.json.JsonSlurperClassic().parseText(worker.toString())
-    //     println(groovy.json.JsonOutput.toJson(worker))
-    //     return groovy.json.JsonOutput.toJson(worker)
-
-    Jenkins.instance.addNode(worker)
-
-
-
     echo 'Creating Jenkins build node for commit: ' + "${gitCommit}"
-    sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' -H Content-Type:application/x-www-form-urlencoded "' + '" -X POST -d \'json=${jenkinsWorker}\' "' + "${env.JENKINS_URL}" + 'computer/doCreateItem?name="stage' + "${stage}" + "-" + "${gitCommit}" + '"&type=hudson.slaves.DumbSlave"'
-
-    launcher = null
+    jenkinsWorker("add", stage)
 
     echo 'Retrieving Agent Secret'
     script {
@@ -227,24 +202,23 @@ def startsim(stage) {
     return null
 }
 
-// @NonCPS
-// def buildJenkinsWorker(stage) {
-//     ComputerLauncher launcher = new JNLPLauncher(true)
-//
-//     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
-//
-//     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
-//     worker.numExecutors = "1"
-// //     worker.setRemoteFS = "/root"
-//     worker.labelString = "worker-${stage}-${gitCommit}"
-//     worker.mode = "EXCLUSIVE"
-// //     worker.setRetentionStrategy = retentionStrategy()
-//
-// //     JSONObject jo = new JSONObject()
-// //     def jo = new groovy.json.JsonBuilder(worker).toString()
-// //     return new groovy.json.JsonSlurperClassic().parseText(worker.toString())
-// //     println(groovy.json.JsonOutput.toJson(worker))
-// //     return groovy.json.JsonOutput.toJson(worker)
-//
-//     Jenkins.instance.addNode(worker)
-// }
+def deleteSim(stage) {
+    echo 'Deleting Jenkins build node for commit: ' + "${gitCommit}"
+    jenkinsWorker("remove", stage)
+}
+
+@NonCPS
+def jenkinsWorker(action, stage) {
+    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", new JNLPLauncher(true)
+
+    worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
+    worker.numExecutors = "1"
+    worker.labelString = "worker-${stage}-${gitCommit}"
+    worker.mode = "EXCLUSIVE"
+
+    if (action == "add") {
+        Jenkins.instance.addNode(worker)
+    } else {
+        Jenkins.instance.removeNode(worker)
+    }
+}
