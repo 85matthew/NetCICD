@@ -209,7 +209,7 @@ def deleteSim(stage) {
 
 @NonCPS
 def jenkinsWorker(action, stage) {
-    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", new JNLPLauncher(true)
+    DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", new JNLPLauncher(true))
 
     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
     worker.numExecutors = "1"
