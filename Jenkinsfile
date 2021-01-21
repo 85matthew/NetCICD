@@ -16,6 +16,8 @@ import hudson.slaves.ComputerLauncher
 
 import groovy.json.JsonBuilder
 
+import jenkins.model.Jenkins
+
 
 pipeline {
     agent none
@@ -214,16 +216,17 @@ def buildJenkinsWorker(stage) {
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
 
     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
-    worker.numExecutors = "1"
-//     worker.remoteFS = "/root"
+    worker.setNumExecutors = "1"
+    worker.setRemoteFS = "/root"
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
-//     worker.retentionStrategy = retentionStrategy()
+//     worker.setRetentionStrategy = retentionStrategy()
 
 //     JSONObject jo = new JSONObject()
 //     def jo = new groovy.json.JsonBuilder(worker).toString()
 //     return new groovy.json.JsonSlurperClassic().parseText(worker.toString())
-    println(groovy.json.JsonOutput.toJson(worker))
-    return groovy.json.JsonOutput.toJson(worker)
+//     println(groovy.json.JsonOutput.toJson(worker))
+//     return groovy.json.JsonOutput.toJson(worker)
 
+    Jenkins.instance.addNode(worker)
 }
