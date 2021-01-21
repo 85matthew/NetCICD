@@ -83,7 +83,8 @@ pipeline {
                     sh 'curl --insecure -X GET -u ' + "${CML_CRED}" + ' ' + "${CML_URL}"  + '/simengine/rest/stop/stage0-' + "${gitCommit}"
 
                     echo 'Removing Jenkins Agent'
-                    sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' -H "Content-Type:application/x-www-form-urlencoded" -H "' + "${jc}" + '" -X POST "' + "${env.JENKINS_URL}" + 'computer/stage0' + "-" + "${gitCommit}" + '/doDelete"'
+                    deleteSim("remote", stage)
+//                     sh 'curl --insecure -L -s -o /dev/null -u ' + "${JENKINS_CRED_USR}:${JENKINS_CRED_PSW}" + ' -H "Content-Type:application/x-www-form-urlencoded" -H "' + "${jc}" + '" -X POST "' + "${env.JENKINS_URL}" + 'computer/stage0' + "-" + "${gitCommit}" + '/doDelete"'
                 }
             }
         }
