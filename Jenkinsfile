@@ -81,6 +81,8 @@ pipeline {
 
                     echo 'Stopping CML simulation'
                     sh 'curl --insecure -X GET -u ' + "${CML_CRED}" + ' ' + "${CML_URL}"  + '/simengine/rest/stop/stage0-' + "${gitCommit}"
+                    echo 'Removing Jenkins Agent'
+                    deleteSim("remote", 0)
                 }
             }
         }
@@ -149,8 +151,6 @@ pipeline {
         }
         cleanup {
             echo 'Cleaning up....'
-            echo 'Removing Jenkins Agent'
-            deleteSim("remote", stage)
         }
     }
 }
