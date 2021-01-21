@@ -216,8 +216,8 @@ def buildJenkinsWorker(stage) {
     DumbSlave worker = new DumbSlave("stage${stage}-${gitCommit}", "/root", launcher)
 
     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
-    worker.setNumExecutors = "1"
-    worker.setRemoteFS = "/root"
+    worker.numExecutors = "1"
+    worker.remoteFS = "/root"
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
 //     worker.setRetentionStrategy = retentionStrategy()
