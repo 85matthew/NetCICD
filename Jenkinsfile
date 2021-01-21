@@ -217,7 +217,7 @@ def buildJenkinsWorker(stage) {
 
     worker.nodeDescription = "NetCICD+host+for+commit+is+stage${stage}-${gitCommit}"
     worker.numExecutors = "1"
-    worker.remoteFS = "/root"
+    worker.setRemoteFS = "/root"
     worker.labelString = "worker-${stage}-${gitCommit}"
     worker.mode = "EXCLUSIVE"
 //     worker.setRetentionStrategy = retentionStrategy()
